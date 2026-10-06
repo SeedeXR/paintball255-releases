@@ -75,7 +75,12 @@
   footer{max-width:840px;margin:0 auto;padding:26px 20px 60px;color:var(--dim);font-size:.9rem;
        border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
        font-family:var(--head)}
-  footer .brand{color:var(--muted)}
+  footer{align-items:center}
+  .cta{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:22px;
+       background:var(--amber);color:#121212;font-family:var(--head);font-weight:700;font-size:.92rem;
+       letter-spacing:.01em;text-decoration:none}
+  .cta:hover{background:#FFB23F;text-decoration:none}
+  .cta:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
   .state{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;color:var(--muted)}
 </style>
 </head>
@@ -99,7 +104,7 @@
   <noscript><div class="state">This page needs JavaScript to format the notes. You can read the plain version here: <a href="CHANGELOG.md">CHANGELOG.md</a>.</div></noscript>
 </main>
 <footer>
-  <span class="brand">seedexr</span>
+  <a class="cta" href="https://www.meta.com/experiences/paintball-255/8677610282284481/" target="_blank" rel="noopener">Download now on the Meta Store</a>
   <span><a href="https://seedexr.com" target="_blank" rel="noopener">seedexr.com</a></span>
 </footer>
 
