@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paintball 255 - Release Notes</title>
+<meta name="description" content="Release notes for Paintball 255, a VR paintball range on the beach for Meta Quest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Darker+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#121212; --surface:#1b1b1b; --surface-2:#212121;
+    --text:#F5F5F5; --muted:#C6C6C6; --dim:#757575; --border:#2a2a2a;
+    --amber:#F59B13; --orange:#E96117; --cream:#FFF8E1;
+    --added:#F59B13; --changed:#E96117; --fixed:#FFF8E1; --known:#C6C6C6; --removed:#C0392B;
+    --head:"Space Grotesk",system-ui,sans-serif;
+    --body:"Darker Grotesque",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:19px;line-height:1.5;
+       -webkit-font-smoothing:antialiased}
+  a{color:var(--amber);text-decoration:none} a:hover{text-decoration:underline}
+  header.top{background:var(--bg);border-bottom:1px solid var(--border);padding:38px 20px 30px;position:relative}
+  header.top::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;
+       background:linear-gradient(90deg,var(--amber),var(--orange))}
+  .top-inner{max-width:840px;margin:0 auto;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .top img{height:46px;width:auto}
+  .top .divider{width:1px;height:40px;background:var(--border)}
+  .top h1{font-family:var(--head);font-size:1.5rem;margin:0;font-weight:700;letter-spacing:-.02em}
+  .top p{margin:3px 0 0;color:var(--muted);font-size:1rem}
+  main{max-width:840px;margin:0 auto;padding:30px 20px 70px}
+  .rel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin:22px 0}
+  .rel-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--border);
+       padding-bottom:14px;margin-bottom:6px}
+  .ver{font-family:var(--head);font-size:1.5rem;font-weight:700;color:var(--amber);letter-spacing:-.01em}
+  .date{color:var(--dim);font-size:.95rem;font-family:var(--head)}
+  .badge{background:var(--amber);color:#121212;font-family:var(--head);font-size:.66rem;font-weight:700;
+       letter-spacing:.8px;padding:3px 10px;border-radius:20px;text-transform:uppercase}
+  .intro{color:var(--muted);margin:12px 0 2px;font-size:1.05rem}
+  .sec{margin-top:18px}
+  ul.sub{margin:8px 0 2px;padding-left:22px}
+  ul.sub li{margin:4px 0;color:var(--muted)}
+  .shot{margin:14px auto 6px;text-align:center}
+  .shot img{display:block;max-width:100%;width:520px;margin:0 auto;border-radius:10px;border:1px solid #2a2a2a}
+  .shot figcaption{color:#C6C6C6;font-size:14px;margin-top:6px}
+  .tag{display:inline-block;font-family:var(--head);font-size:.68rem;font-weight:700;letter-spacing:.6px;
+       text-transform:uppercase;padding:4px 11px;border-radius:6px;margin-bottom:9px}
+  .tag.added{background:var(--added);color:#121212}
+  .tag.changed{background:var(--changed);color:#fff}
+  .tag.fixed{background:var(--fixed);color:#121212}
+  .tag.known{background:transparent;color:var(--known);border:1px solid var(--known)}
+  .tag.removed{background:var(--removed);color:#fff}
+  .tag.other{background:var(--surface-2);color:var(--muted);border:1px solid var(--border)}
+  ul{margin:2px 0 4px;padding-left:22px} li{margin:6px 0}
+  footer{max-width:840px;margin:0 auto;padding:26px 20px 60px;color:var(--dim);font-size:.9rem;
+       border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+       font-family:var(--head)}
+  footer .brand{color:var(--muted)}
+  .state{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <img src="assets/seede-logo.png" alt="Seede">
+    <div class="divider"></div>
+    <div>
+      <h1>Paintball 255 &middot; Release Notes</h1>
+      <p>VR paintball range on the beach for Meta Quest</p>
+    </div>
+  </div>
+</header>
+<main id="notes"><div class="state">Loading release notes&hellip;</div></main>
+<footer>
+  <span class="brand">seedexr</span>
+  <span><a href="https://seedexr.com" target="_blank" rel="noopener">seedexr.com</a></span>
+</footer>
+
+<script>
+const TAGS = {
+  "added":"added","new":"added","features":"added",
+  "changed":"changed","improved":"changed","improvements":"changed",
+  "fixed":"fixed","fixes":"fixed",
+  "known issues":"known","known":"known",
+  "removed":"removed","deprecated":"removed"
+};
+function tagClass(n){ return TAGS[n.trim().toLowerCase()] || "other"; }
+function esc(s){ return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+function parse(md){
+  const lines = md.split(/\r?\n/);
+  const versions = []; let v=null, sec=null;
+  for(const raw of lines){
+    const line = raw.replace(/\s+$/,''); let m;
+    if(line.startsWith('## ') && (m = line.match(/^##\s+\[?([^\]]+?)\]?\s*(?:-\s*(.*))?$/))){
+      v = {version:m[1].trim(), date:(m[2]||'').trim(), intro:[], sections:[]}; versions.push(v); sec=null;
+    } else if(v && (m = line.match(/^###\s+(.*)$/))){
+      sec = {name:m[1].trim(), items:[]}; v.sections.push(sec);
+    } else if(v && (m = line.match(/^\s*!\[([^\]]*)\]\(([^)\s]+)\)$/))){
+      // An image belongs to the point above it: the last sub-item if there is one, else the last item, else the section.
+      const img = {alt:m[1].trim(), src:m[2].trim()};
+      const last = sec && sec.items.length ? sec.items[sec.items.length-1] : null;
+      const target = last ? (last.subs && last.subs.length ? last.subs[last.subs.length-1] : last) : null;
+      if(target) (target.images = target.images || []).push(img);
+      else { if(!sec){ sec = {name:'', items:[]}; v.sections.push(sec); } (sec.images = sec.images || []).push(img); }
+    } else if(v && (m = line.match(/^(\s+)[-*]\s+(.*)$/)) && sec && sec.items.length){
+      const last = sec.items[sec.items.length-1];
+      (last.subs = last.subs || []).push({text:m[2].trim()});
+    } else if(v && (m = line.match(/^[-*]\s+(.*)$/))){
+      if(sec) sec.items.push({text:m[1].trim()});
+      else { sec = {name:'', items:[{text:m[1].trim()}]}; v.sections.push(sec); }
+    } else if(v && line.trim() && !line.startsWith('#')){
+      if(!sec) v.intro.push(line.trim());
+    }
+  }
+  return versions;
+}
+function render(vs){
+  if(!vs.length) return '<div class="state">No releases yet.</div>';
+  return vs.map((v,i)=>{
+    const badge = i===0 ? '<span class="badge">Latest</span>' : '';
+    const date = v.date ? `<span class="date">${esc(v.date)}</span>` : '';
+    const intro = v.intro.length ? `<p class="intro">${esc(v.intro.join(' '))}</p>` : '';
+    const secs = v.sections.map(s=>{
+      const figs = imgs => (imgs||[]).map(im=>`<figure class="shot"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy"><figcaption>${esc(im.alt)}</figcaption></figure>`).join('');
+      const items = s.items.map(it=>`<li>${esc(it.text)}${it.subs ? `<ul class="sub">${it.subs.map(x=>`<li>${esc(x.text)}${figs(x.images)}</li>`).join('')}</ul>` : ''}${figs(it.images)}</li>`).join('');
+      const head = s.name ? `<span class="tag ${tagClass(s.name)}">${esc(s.name)}</span>` : '';
+      const shots = figs(s.images);
+      return `<div class="sec">${head}<ul>${items}</ul>${shots}</div>`;
+    }).join('');
+    return `<article class="rel"><div class="rel-head"><span class="ver">${esc(v.version)}</span>${date}${badge}</div>${intro}${secs}</article>`;
+  }).join('');
+}
+fetch('CHANGELOG.md',{cache:'no-store'})
+  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.text(); })
+  .then(md=>{ document.getElementById('notes').innerHTML = render(parse(md)); })
+  .catch(()=>{ document.getElementById('notes').innerHTML =
+    '<div class="state">Release notes are being updated. Please check back shortly.</div>'; });
+</script>
+</body>
+</html>
