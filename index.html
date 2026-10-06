@@ -87,7 +87,8 @@ const TAGS = {
   "removed":"removed","deprecated":"removed"
 };
 function tagClass(n){ return TAGS[n.trim().toLowerCase()] || "other"; }
-function esc(s){ return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+// Escapes for both text and attribute contexts (captions and image paths land inside attributes).
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 function parse(md){
   const lines = md.split(/\r?\n/);
