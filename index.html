@@ -5,21 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Paintball 255 - Release Notes</title>
 <meta name="description" content="Release notes for Paintball 255, a VR paintball range on the beach for Meta Quest.">
+<meta name="theme-color" content="#10161A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paintball 255 - Release Notes">
+<meta property="og:description" content="What is new in Paintball 255, a VR paintball range on the beach for Meta Quest.">
+<meta property="og:url" content="https://seedexr.github.io/paintball255-releases/">
+<meta property="og:image" content="https://seedexr.github.io/paintball255-releases/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Darker+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Darker+Grotesque:wght@400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#121212; --surface:#1b1b1b; --surface-2:#212121;
-    --text:#F5F5F5; --muted:#C6C6C6; --dim:#757575; --border:#2a2a2a;
-    --amber:#F59B13; --orange:#E96117; --cream:#FFF8E1;
-    --added:#F59B13; --changed:#E96117; --fixed:#FFF8E1; --known:#C6C6C6; --removed:#C0392B;
+    /* Paintball 255 palette: seedexr amber kept for the brand, the rest sampled from the
+       beach key art (slate sky, palm green, ocean, sand). */
+    --bg:#10161A; --surface:#172026; --surface-2:#1D2930;
+    --text:#F5F5F5; --muted:#C9D1D4; --dim:#8B979D; --border:#26333B;
+    --amber:#F59B13; --orange:#E96117; --cream:#EFDBB5;
+    --palm:#A9C255; --ocean:#71B2BD; --slate:#54676D;
+    --added:var(--palm); --changed:var(--ocean); --fixed:var(--cream); --known:#C9D1D4; --removed:#C0392B;
     --head:"Space Grotesk",system-ui,sans-serif;
     --body:"Darker Grotesque",system-ui,sans-serif;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:19px;line-height:1.5;
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:1.1875rem;line-height:1.5;
        -webkit-font-smoothing:antialiased}
   a{color:var(--amber);text-decoration:none} a:hover{text-decoration:underline}
   header.top{background:var(--bg);border-bottom:1px solid var(--border);padding:38px 20px 30px;position:relative}
@@ -34,7 +48,7 @@
   .rel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin:22px 0}
   .rel-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--border);
        padding-bottom:14px;margin-bottom:6px}
-  .ver{font-family:var(--head);font-size:1.5rem;font-weight:700;color:var(--amber);letter-spacing:-.01em}
+  .ver{font-family:var(--head);font-size:1.5rem;font-weight:700;color:var(--amber);letter-spacing:-.01em;margin:0;line-height:1.2}
   .date{color:var(--dim);font-size:.95rem;font-family:var(--head)}
   .badge{background:var(--amber);color:#121212;font-family:var(--head);font-size:.66rem;font-weight:700;
        letter-spacing:.8px;padding:3px 10px;border-radius:20px;text-transform:uppercase}
@@ -43,12 +57,16 @@
   ul.sub{margin:8px 0 2px;padding-left:22px}
   ul.sub li{margin:4px 0;color:var(--muted)}
   .shot{margin:14px auto 6px;text-align:center}
-  .shot img{display:block;max-width:100%;width:520px;margin:0 auto;border-radius:10px;border:1px solid #2a2a2a}
-  .shot figcaption{color:#C6C6C6;font-size:14px;margin-top:6px}
+  .shot img{display:block;max-width:100%;width:520px;margin:0 auto;border-radius:10px;border:1px solid var(--border)}
+  .shot figcaption{color:var(--muted);font-size:.875rem;margin-top:6px}
   .tag{display:inline-block;font-family:var(--head);font-size:.68rem;font-weight:700;letter-spacing:.6px;
-       text-transform:uppercase;padding:4px 11px;border-radius:6px;margin-bottom:9px}
+       text-transform:uppercase;padding:4px 11px;border-radius:6px;margin:0 0 9px;line-height:1.5}
   .tag.added{background:var(--added);color:#121212}
-  .tag.changed{background:var(--changed);color:#fff}
+  .tag.changed{background:var(--changed);color:#121212}
+  @media (max-width:520px){ .top .divider{display:none} .top-inner{gap:14px} }
+  .hero{margin:0 0 4px;border:1px solid var(--border);border-radius:14px;overflow:hidden;
+       background:var(--slate);aspect-ratio:2/1}
+  .hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%}
   .tag.fixed{background:var(--fixed);color:#121212}
   .tag.known{background:transparent;color:var(--known);border:1px solid var(--known)}
   .tag.removed{background:var(--removed);color:#fff}
@@ -72,7 +90,14 @@
     </div>
   </div>
 </header>
-<main id="notes"><div class="state">Loading release notes&hellip;</div></main>
+<main>
+  <figure class="hero">
+    <img src="assets/hero.jpg" width="1600" height="900" fetchpriority="high"
+         alt="Two masked paintball players on a small beach island with a palm tree, a hammock, a picnic table and a wooden Paintball 255 sign">
+  </figure>
+  <div id="notes" aria-live="polite"><div class="state">Loading release notes&hellip;</div></div>
+  <noscript><div class="state">This page needs JavaScript to format the notes. You can read the plain version here: <a href="CHANGELOG.md">CHANGELOG.md</a>.</div></noscript>
+</main>
 <footer>
   <span class="brand">seedexr</span>
   <span><a href="https://seedexr.com" target="_blank" rel="noopener">seedexr.com</a></span>
@@ -127,11 +152,11 @@ function render(vs){
     const secs = v.sections.map(s=>{
       const figs = imgs => (imgs||[]).map(im=>`<figure class="shot"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy"><figcaption>${esc(im.alt)}</figcaption></figure>`).join('');
       const items = s.items.map(it=>`<li>${esc(it.text)}${it.subs ? `<ul class="sub">${it.subs.map(x=>`<li>${esc(x.text)}${figs(x.images)}</li>`).join('')}</ul>` : ''}${figs(it.images)}</li>`).join('');
-      const head = s.name ? `<span class="tag ${tagClass(s.name)}">${esc(s.name)}</span>` : '';
+      const head = s.name ? `<h3 class="tag ${tagClass(s.name)}">${esc(s.name)}</h3>` : '';
       const shots = figs(s.images);
       return `<div class="sec">${head}<ul>${items}</ul>${shots}</div>`;
     }).join('');
-    return `<article class="rel"><div class="rel-head"><span class="ver">${esc(v.version)}</span>${date}${badge}</div>${intro}${secs}</article>`;
+    return `<article class="rel"><div class="rel-head"><h2 class="ver">${esc(v.version)}</h2>${date}${badge}</div>${intro}${secs}</article>`;
   }).join('');
 }
 fetch('CHANGELOG.md',{cache:'no-store'})
